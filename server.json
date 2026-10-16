@@ -1,0 +1,39 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.postwharf/mcp",
+  "description": "Schedule and publish social posts to Instagram, TikTok, X, LinkedIn, YouTube and five more networks.",
+  "title": "PostWharf",
+  "version": "0.1.0",
+  "websiteUrl": "https://postwharf.com/developers",
+  "icons": [
+    {
+      "src": "https://postwharf.com/assets/icon-512.png",
+      "mimeType": "image/png",
+      "sizes": [
+        "512x512"
+      ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.postwharf.com/mcp",
+      "headers": [
+        {
+          "description": "Your PostWharf workspace API key, sent as a Bearer token. Copy it from Agent & MCP in the dashboard.",
+          "isRequired": true,
+          "value": "Bearer {workspace_api_key}",
+          "isSecret": true,
+          "variables": {
+            "workspace_api_key": {
+              "description": "Workspace API key from the PostWharf dashboard. One key per brand.",
+              "isRequired": true,
+              "isSecret": true
+            }
+          },
+          "name": "Authorization"
+        }
+      ]
+    }
+  ]
+}
