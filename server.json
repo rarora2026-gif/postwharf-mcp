@@ -3,8 +3,8 @@
   "name": "com.postwharf/mcp",
   "description": "Schedule and publish social posts to Instagram, TikTok, X, LinkedIn, YouTube and five more networks.",
   "title": "PostWharf",
-  "version": "0.1.0",
-  "websiteUrl": "https://postwharf.com/developers",
+  "version": "0.1.1",
+  "websiteUrl": "https://postwharf.com/mcp",
   "icons": [
     {
       "src": "https://postwharf.com/assets/icon-512.png",
