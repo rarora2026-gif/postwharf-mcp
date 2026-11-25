@@ -1,5 +1,7 @@
 # PostWharf MCP server
 
+[![PostWharf MCP connector](https://glama.ai/mcp/connectors/com.postwharf/mcp/badges/score.svg)](https://glama.ai/mcp/connectors/com.postwharf/mcp)
+
 Schedule and publish social media posts from Claude, ChatGPT, Cursor, Codex or any other MCP client.
 
 PostWharf runs a hosted MCP server. Connect it to your agent and the agent can draft, schedule, publish and track posts for one brand, with a delivery receipt from each network a post goes to.
