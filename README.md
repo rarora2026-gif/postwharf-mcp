@@ -14,7 +14,7 @@ There is nothing to install. The server is hosted, and this repository holds its
 |---|---|
 | Endpoint | `https://mcp.postwharf.com/mcp` |
 | Transport | Streamable HTTP |
-| Auth | `Authorization: Bearer <workspace key>`, or a connect link for ChatGPT and the Claude apps |
+| Auth | OAuth sign-in, or `Authorization: Bearer <workspace key>` |
 | MCP Registry | `com.postwharf/mcp` ([server.json](server.json) is a copy of the entry) |
 | Docs | https://postwharf.com/developers |
 
@@ -22,10 +22,11 @@ There is nothing to install. The server is hosted, and this repository holds its
 
 Every connection acts for one workspace, and a workspace is one brand. The agent sees that brand's accounts and no others, so if you run five brands you add five connections.
 
-There are two kinds of credential:
+There are three ways to connect:
 
+- **Sign in with OAuth.** Add `https://mcp.postwharf.com/mcp` with no credentials. Clients that support MCP authorization (Claude, ChatGPT, Claude Code, Cursor and others) open a PostWharf sign-in page, where you pick the workspace and approve. The app gets a token for that one workspace that reaches posts, media, channels and receipts, and nothing else: not billing, API keys or team settings. You can see and disconnect it under Agent & MCP in the dashboard.
 - **Workspace key.** Send it as `Authorization: Bearer <workspace key>` from clients that let you set a header: Claude Code, Cursor and Codex. Find it in the dashboard under API keys.
-- **Connect link.** ChatGPT and the Claude web and desktop apps have no field for a header, so they use a link instead. Copy it from Agent & MCP in the dashboard, paste it as the server URL, and set no authentication: the link is the key. It is separate from your workspace key, so if it ends up somewhere it should not, you can replace it from the dashboard and the CLI and anything scripted keep running.
+- **Connect link.** For a client that can neither sign in nor send a header, use a link instead. Copy it from Agent & MCP in the dashboard, paste it as the server URL, and set no authentication: the link is the key. It is separate from your workspace key, so if it ends up somewhere it should not, you can replace it from the dashboard and the CLI and anything scripted keep running.
 
 ## Setup
 
@@ -65,18 +66,18 @@ Authorization: Bearer YOUR_WORKSPACE_KEY
 
 ```text
 # Settings -> Connectors -> Add custom connector
-# Server URL: the connect link on your PostWharf dashboard,
-#             under Agent & MCP -> Claude app
-# Leave the OAuth fields empty. The link is the key.
+# Server URL: https://mcp.postwharf.com/mcp
+# Leave the OAuth fields empty. Claude opens the PostWharf
+# sign-in page; pick the workspace and approve.
 ```
 
 ### ChatGPT
 
 ```text
 # Settings -> Connectors -> Create
-# Server URL: the connect link on your PostWharf dashboard,
-#             under Agent & MCP -> ChatGPT
-# Authentication: None. The link is the key.
+# Server URL: https://mcp.postwharf.com/mcp
+# Authentication: OAuth. ChatGPT registers itself and opens
+# the PostWharf sign-in page; pick the workspace and approve.
 # Developer mode has to be on, and it is not on the free plan.
 ```
 
@@ -93,7 +94,7 @@ Then ask in plain words:
 
 ## Tools
 
-Every connection gets the same 19 tools.
+Every connection gets the same 21 tools.
 
 | Tool | Name |
 |---|---|
@@ -104,6 +105,7 @@ Every connection gets the same 19 tools.
 | Stage a file you made | `stage_upload` |
 | Upload media | `upload_media` |
 | Describe an image | `describe_media` |
+| Choose a video cover | `set_video_cover` |
 | Create and publish a post | `create_post` |
 | Schedule a post | `schedule_post` |
 | Schedule a batch of posts | `schedule_many` |
@@ -114,6 +116,7 @@ Every connection gets the same 19 tools.
 | Get post status | `get_status` |
 | List recent and queued posts | `list_queue` |
 | Cancel a post | `cancel_post` |
+| Retry the networks that failed | `retry_post` |
 | List delivery receipts | `list_events` |
 | Health check | `health` |
 
